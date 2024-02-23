@@ -1,6 +1,6 @@
 {
-    "name": "flutter_project",
-    "short_name": "flutter_project",
+    "name": "ball_shuffling_starting_project",
+    "short_name": "ball_shuffling_starting_project",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
