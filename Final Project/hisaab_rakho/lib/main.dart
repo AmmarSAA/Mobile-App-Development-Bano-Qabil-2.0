@@ -1,3 +1,9 @@
+/************************
+* File Name: main.dart  *
+* Author: Ammar S.A.A   *
+* Output: Main Starting *
+************************/
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import './screens/Splash.dart';
@@ -15,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Hisaab Rakho',
       theme: ThemeData(
         textTheme: GoogleFonts.interTextTheme(),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
       home: const Splash(),
@@ -93,7 +99,7 @@ class MyApp extends StatelessWidget {
 //           // wireframe for each widget.
 //           mainAxisAlignment: MainAxisAlignment.center,
 //           children: <Widget>[
-//             const Text(
+//             Text(
 //               'You have pushed the button this many times:',
 //             ),
 //             Text(

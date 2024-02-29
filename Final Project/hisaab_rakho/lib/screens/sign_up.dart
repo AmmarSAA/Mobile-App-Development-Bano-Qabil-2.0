@@ -1,17 +1,17 @@
 /**************************
-* File Name: sign_in.dart *
+* File Name: sign_up.dart *
 * Author: Ammar S.A.A     *
-* Output: Sign In Screen  *
+* Output: Sign Up Screen  *
 **************************/
 
 import 'package:flutter/material.dart';
-import './sign_up.dart';
-import './dashboard.dart';
+import './sign_in.dart';
 import '../includes/functions.dart';
 
-class SignIn extends StatelessWidget {
-  SignIn({super.key});
+class SignUp extends StatelessWidget {
+  SignUp({Key? key});
 
+  final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -36,6 +36,20 @@ class SignIn extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 16, vertical: 25),
             child: Column(
               children: [
+                SizedBox(height: 10),
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter your name',
+                    labelText: 'Name',
+                    hintStyle: TextStyle(fontSize: 16),
+                    labelStyle: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -48,7 +62,7 @@ class SignIn extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 10),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -66,13 +80,13 @@ class SignIn extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignUp()),
+                      MaterialPageRoute(builder: (context) => SignIn()),
                     );
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(vertical: 16),
                     child: Text(
-                      "New User? Sign Up Now!",
+                      "Already Signed Up? Sign In Now!",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 16,
@@ -90,19 +104,26 @@ class SignIn extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  String email = emailController.text.trim();
-                  String password = passwordController.text.trim();
+                  if (nameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    // Add the new user
+                    bool addedSuccessfully = addUser(
+                      emailController.text,
+                      passwordController.text,
+                    );
 
-                  if (email.isNotEmpty && password.isNotEmpty) {
-                    bool isValid = verifyUser(email, password);
-
-                    if (isValid) {
+                    if (addedSuccessfully) {
+                      print('User added successfully.');
+                      nameController.clear();
+                      emailController.clear();
+                      passwordController.clear();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
+                        MaterialPageRoute(builder: (context) => SignIn()),
                       );
                     } else {
-                      showAlertDialog(context, 'Invalid credentials.');
+                      showAlertDialog(context, 'User already exists.');
                     }
                   } else {
                     showAlertDialog(context, 'Fill all fields.');
@@ -116,7 +137,7 @@ class SignIn extends StatelessWidget {
                   minimumSize: const Size(194, 42),
                 ),
                 child: Text(
-                  'Sign In',
+                  'Sign Up',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,

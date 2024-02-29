@@ -1,3 +1,9 @@
+/***********************
+* File Name: home.dart *
+* Author: Ammar S.A.A  *
+* Output: Home Screen  *
+***********************/
+
 import 'package:flutter/material.dart';
 import './sign_in.dart';
 
@@ -52,7 +58,7 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignIn()),
+                    MaterialPageRoute(builder: (context) => SignIn()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -62,7 +68,7 @@ class Home extends StatelessWidget {
                   ),
                   minimumSize: const Size(194, 42),
                 ),
-                child: const Text(
+                child: Text(
                   'Continue',
                   style: TextStyle(
                     fontSize: 16,

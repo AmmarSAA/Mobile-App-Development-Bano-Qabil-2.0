@@ -1,27 +1,24 @@
+/*************************
+* File Name: splash.dart *
+* Author: Ammar S.A.A    *
+* Output: Splash Screen  *
+*************************/
+
 import 'package:flutter/material.dart';
 import './home.dart';
 
-class Splash extends StatefulWidget {
+class Splash extends StatelessWidget {
   const Splash({super.key});
 
   @override
-  State<Splash> createState() => _SplashState();
-}
-
-class _SplashState extends State<Splash> {
-  @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const Home()),
       );
     });
-  }
 
-  @override
-  Widget build(BuildContext context) {
     return const Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
