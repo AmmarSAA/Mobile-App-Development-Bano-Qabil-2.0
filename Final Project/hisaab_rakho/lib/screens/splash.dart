@@ -28,7 +28,6 @@ class Splash extends StatelessWidget {
             child: Text(
               'Hisaab Rakho',
               style: TextStyle(
-                color: Colors.black,
                 fontSize: 24,
                 fontWeight: FontWeight.normal,
               ),

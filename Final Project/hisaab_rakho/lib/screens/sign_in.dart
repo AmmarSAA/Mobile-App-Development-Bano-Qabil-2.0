@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import './sign_up.dart';
 import './dashboard.dart';
 import '../includes/functions.dart';
+import './../includes/classes/session.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
@@ -23,7 +24,7 @@ class SignIn extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: EdgeInsets.all(0),
+            margin: const EdgeInsets.all(0),
             child: Image.asset(
               'assets/splash.png',
               height: 389,
@@ -31,14 +32,14 @@ class SignIn extends StatelessWidget {
               alignment: Alignment.topCenter,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 25),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
             child: Column(
               children: [
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your email',
                     labelText: 'Email',
                     hintStyle: TextStyle(fontSize: 16),
@@ -48,11 +49,11 @@ class SignIn extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '********',
                     labelText: 'Password',
                     hintStyle: TextStyle(fontSize: 16),
@@ -70,11 +71,10 @@ class SignIn extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    child: const Text(
                       "New User? Sign Up Now!",
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -85,9 +85,9 @@ class SignIn extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 12),
+            margin: const EdgeInsets.only(bottom: 12),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () {
                   String email = emailController.text.trim();
@@ -97,9 +97,11 @@ class SignIn extends StatelessWidget {
                     bool isValid = verifyUser(email, password);
 
                     if (isValid) {
+                      Session.signInUser(email, password);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Dashboard()),
+                        MaterialPageRoute(
+                            builder: (context) => const Dashboard()),
                       );
                     } else {
                       showAlertDialog(context, 'Invalid credentials.');
@@ -115,7 +117,7 @@ class SignIn extends StatelessWidget {
                   ),
                   minimumSize: const Size(194, 42),
                 ),
-                child: Text(
+                child: const Text(
                   'Sign In',
                   style: TextStyle(
                     fontSize: 16,
@@ -135,14 +137,14 @@ class SignIn extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alert!!!'),
+          title: const Text('Alert!!!'),
           content: Text(message),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

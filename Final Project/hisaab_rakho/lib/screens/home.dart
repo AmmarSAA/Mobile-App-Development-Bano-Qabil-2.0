@@ -68,7 +68,7 @@ class Home extends StatelessWidget {
                   ),
                   minimumSize: const Size(194, 42),
                 ),
-                child: Text(
+                child: const Text(
                   'Continue',
                   style: TextStyle(
                     fontSize: 16,

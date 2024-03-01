@@ -9,7 +9,7 @@ import './sign_in.dart';
 import '../includes/functions.dart';
 
 class SignUp extends StatelessWidget {
-  SignUp({Key? key});
+  SignUp({super.key});
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -23,7 +23,7 @@ class SignUp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            margin: EdgeInsets.all(0),
+            margin: const EdgeInsets.all(0),
             child: Image.asset(
               'assets/splash.png',
               height: 389,
@@ -31,15 +31,15 @@ class SignUp extends StatelessWidget {
               alignment: Alignment.topCenter,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 25),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 25),
             child: Column(
               children: [
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your name',
                     labelText: 'Name',
                     hintStyle: TextStyle(fontSize: 16),
@@ -49,10 +49,10 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: emailController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter your email',
                     labelText: 'Email',
                     hintStyle: TextStyle(fontSize: 16),
@@ -62,11 +62,11 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '********',
                     labelText: 'Password',
                     hintStyle: TextStyle(fontSize: 16),
@@ -84,11 +84,10 @@ class SignUp extends StatelessWidget {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
-                    child: Text(
+                    margin: const EdgeInsets.symmetric(vertical: 16),
+                    child: const Text(
                       "Already Signed Up? Sign In Now!",
                       style: TextStyle(
-                        color: Colors.blue,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
@@ -99,9 +98,9 @@ class SignUp extends StatelessWidget {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(bottom: 12),
+            margin: const EdgeInsets.only(bottom: 12),
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () {
                   if (nameController.text.isNotEmpty &&
@@ -114,7 +113,6 @@ class SignUp extends StatelessWidget {
                     );
 
                     if (addedSuccessfully) {
-                      print('User added successfully.');
                       nameController.clear();
                       emailController.clear();
                       passwordController.clear();
@@ -136,7 +134,7 @@ class SignUp extends StatelessWidget {
                   ),
                   minimumSize: const Size(194, 42),
                 ),
-                child: Text(
+                child: const Text(
                   'Sign Up',
                   style: TextStyle(
                     fontSize: 16,
@@ -156,14 +154,14 @@ class SignUp extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Alert!!!'),
+          title: const Text('Alert!!!'),
           content: Text(message),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );

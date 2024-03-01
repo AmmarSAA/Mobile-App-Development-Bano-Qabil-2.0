@@ -1,16 +1,224 @@
 /****************************
 * File Name: dashboard.dart *
 * Author: Ammar S.A.A       *
-* Output: Dashboard Screen  *
+* Content: Dashboard Screen *
 ****************************/
 
 import 'package:flutter/material.dart';
+import '../includes/functions.dart';
+import '../includes/classes/session.dart';
+import './../includes/classes.dart';
+import './profile.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: const Text('Dashboard'),
+      // ),
+      body: Column(
+        children: [
+          // Main Container
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/dashboard_header.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                // Current Balance container
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: AssetImage('assets/dashboard_header.png'),
+                      fit: BoxFit.cover,
+                    ),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Current Balance',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      FutureBuilder<int>(
+                        future: Future(() async {
+                          int expenses =
+                              await sumExpenses(Session.getUserEmail()!);
+                          int income = await sumIncome(Session.getUserEmail()!);
+                          return calculateBalance(expenses, income);
+                        }),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Text('Loading...');
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            return Text('\$${snapshot.data}');
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                // Expenses and Income containers
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      width: MediaQuery.of(context).size.width / 2 - 24,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/expense_card.png'),
+                          fit: BoxFit.cover,
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Expense',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          FutureBuilder<int>(
+                            future: Future(() async {
+                              return sumExpenses(Session.getUserEmail()!);
+                            }),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Text('Loading...');
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return Text('\$${snapshot.data}');
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      width: MediaQuery.of(context).size.width / 2 - 24,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/income_icon.png'),
+                          fit: BoxFit.cover,
+                        ),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Text(
+                            'Income',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          FutureBuilder<int>(
+                            future: Future(() async {
+                              return sumIncome(Session.getUserEmail()!);
+                            }),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Text('Loading...');
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return Text('\$${snapshot.data}');
+                              }
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // List of Transactions
+          Expanded(
+            child: FutureBuilder<List<Transactions>>(
+              future: getTransactions(Session.getUserEmail()!),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
+                  List<Transactions> transactions = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: transactions.length,
+                    itemBuilder: (context, index) {
+                      String iconPath = transactions[index].income
+                          ? 'assets/income_arrow.png'
+                          : 'assets/expense_arrow.png';
+                      return ListTile(
+                        leading: Image.asset(
+                          iconPath,
+                          width: 24,
+                          height: 24,
+                        ),
+                        title: Text(transactions[index].description),
+                        subtitle: Text('\$${transactions[index].amount}'),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
+        ],
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Dashboard()),
+              );
+              break;
+            case 1:
+              // Handle Add button tap
+              break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Profile()),
+              );
+              break;
+          }
+        },
+      ),
+    );
   }
 }
