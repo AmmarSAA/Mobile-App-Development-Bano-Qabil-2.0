@@ -7,8 +7,8 @@
 import 'package:flutter/material.dart';
 import '../includes/functions.dart';
 import '../includes/classes/session.dart';
-import './../includes/classes.dart';
-import './profile.dart';
+import '../includes/classes.dart';
+import '../includes/bottom_navigation.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -16,13 +16,8 @@ class Dashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: const Text('Dashboard'),
-      // ),
       body: Column(
         children: [
-          // Main Container
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -33,7 +28,6 @@ class Dashboard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Column(
               children: [
-                // Current Balance container
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
@@ -71,7 +65,6 @@ class Dashboard extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Expenses and Income containers
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -150,7 +143,6 @@ class Dashboard extends StatelessWidget {
               ],
             ),
           ),
-          // List of Transactions
           Expanded(
             child: FutureBuilder<List<Transactions>>(
               future: getTransactions(Session.getUserEmail()!),
@@ -184,41 +176,7 @@ class Dashboard extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Add',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
-        ],
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Dashboard()),
-              );
-              break;
-            case 1:
-              // Handle Add button tap
-              break;
-            case 2:
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Profile()),
-              );
-              break;
-          }
-        },
-      ),
+      bottomNavigationBar: bottomNavigation(context),
     );
   }
 }

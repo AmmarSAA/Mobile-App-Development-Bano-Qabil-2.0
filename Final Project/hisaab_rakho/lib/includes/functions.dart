@@ -6,18 +6,18 @@
 * 1. verifyUser                *
 * 2. addUser                   *
 * 3. isUserSignedIn            *
-* 4. signOut                   *
-* 5. getUserDetails            *
-* 6. getExpenses               *
-* 7. getIncome                 *
-* 8. sumExpenses               *
-* 9. sumIncome                 *
-* 10. calculateBalance         *
-* 11. getTransactions          *
+* 4. getUserDetails            *
+* 5. getExpenses               *
+* 6. getIncome                 *
+* 7. sumExpenses               *
+* 8. sumIncome                 *
+* 9. calculateBalance         *
+* 10. getTransactions          *
 *******************************/
 
 // Database
 import 'classes.dart';
+import './classes/session.dart';
 
 String? _userName;
 String? _userEmail;
@@ -28,7 +28,7 @@ String? _userEmail;
   @Date:		29-Feb-2024
   @input:		Email And Password
   @output:	True/False Based On Entered User Credentials
-  */
+*/
 bool verifyUser(String email, String password) {
   for (var user in users) {
     if (user.email == email && user.password == password) {
@@ -46,7 +46,7 @@ bool verifyUser(String email, String password) {
   @Date: 29-Feb-2024
   @input: Email And Password
   @output: True/False Based On Entered User Credentials
-  */
+*/
 bool addUser(String email, String password) {
   bool userExists = users.any((user) => user.email == email);
 
@@ -66,28 +66,17 @@ bool addUser(String email, String password) {
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: True/False based on user sign-in status
-  */
+*/
 bool isUserSignedIn() {
   return _userName != null && _userEmail != null;
 }
 
 /*
-  4. Sign out the user
-  @Author: Syed Ammar Ahmed
-  @Date: 29-Feb-2024
-  @output: signs out user
-  */
-void signOut() {
-  _userName = null;
-  _userEmail = null;
-}
-
-/*
-  5. Fetch user details
+  4. Fetch user details
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: user details
-  */
+*/
 User? getUserDetails(String email, String password) {
   for (var user in users) {
     if (user.email == email && user.password == password) {
@@ -98,11 +87,11 @@ User? getUserDetails(String email, String password) {
 }
 
 /*
-  6. Get Expenses for a User
+  5. Get Expenses for a User
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: List of expense transactions for a user
-  */
+*/
 List<Transactions> getExpenses(String email) {
   return transactions
       .where((transaction) => transaction.email == email && !transaction.income)
@@ -110,11 +99,11 @@ List<Transactions> getExpenses(String email) {
 }
 
 /*
-  7. Get Income for a User
+  6. Get Income for a User
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: List of income transactions for a user
-  */
+*/
 List<Transactions> getIncome(String email) {
   return transactions
       .where((transaction) => transaction.email == email && transaction.income)
@@ -122,39 +111,39 @@ List<Transactions> getIncome(String email) {
 }
 
 /*
-  8. Sum of Expenses for a User
+  7. Sum of Expenses for a User
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: Total sum of expenses for a user
-  */
+*/
 int sumExpenses(String email) {
   return getExpenses(email)
       .fold(0, (total, transaction) => total + transaction.amount);
 }
 
 /*
-  9. Sum of Income for a User
+  8. Sum of Income for a User
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: Total sum of income for a user
-  */
+*/
 int sumIncome(String email) {
   return getIncome(email)
       .fold(0, (total, transaction) => total + transaction.amount);
 }
 
 /*
-  10. Calculate Balance for a User
+  9. Calculate Balance for a User
   @Author: Syed Ammar Ahmed
   @Date: 29-Feb-2024
   @output: Future<int> representing the user's balance
-  */
+*/
 Future<int> calculateBalance(int expenses, int income) async {
   return income - expenses;
 }
 
 /*
-11. Get all Transactions for a User
+10. Get all Transactions for a User
 @Author: Syed Ammar Ahmed
 @Date: 29-Feb-2024
 @output: List of all transactions for a user

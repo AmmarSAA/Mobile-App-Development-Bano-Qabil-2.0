@@ -30,4 +30,11 @@ class Session {
       setUser(userDetails.name, userDetails.email);
     }
   }
+
+  static bool signOut() {
+    _userName = null;
+    _userEmail = null;
+
+    return true;
+  }
 }
