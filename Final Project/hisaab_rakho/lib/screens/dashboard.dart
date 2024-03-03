@@ -137,9 +137,13 @@ class Dashboard extends StatelessWidget {
                                   ConnectionState.waiting) {
                                 return const Text('Loading...');
                               } else if (snapshot.hasError) {
-                                return Text('Error: ${snapshot.error}');
+                                return Text('Error: ${snapshot.error}',
+                                    style:
+                                        const TextStyle(color: Colors.white));
                               } else {
-                                return Text('\$${snapshot.data}');
+                                return Text('\$${snapshot.data}',
+                                    style:
+                                        const TextStyle(color: Colors.white));
                               }
                             },
                           ),
