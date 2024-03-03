@@ -83,7 +83,9 @@ class Dashboard extends StatelessWidget {
                         children: [
                           const Text(
                             'Expense',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                           FutureBuilder<int>(
                             future: Future(() async {
@@ -118,7 +120,9 @@ class Dashboard extends StatelessWidget {
                         children: [
                           const Text(
                             'Income',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                           FutureBuilder<int>(
                             future: Future(() async {

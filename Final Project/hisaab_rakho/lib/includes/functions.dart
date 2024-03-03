@@ -11,13 +11,13 @@
 * 6. getIncome                 *
 * 7. sumExpenses               *
 * 8. sumIncome                 *
-* 9. calculateBalance         *
+* 9. calculateBalance          *
 * 10. getTransactions          *
+* 11. createTransaction        *
 *******************************/
 
 // Database
 import 'classes.dart';
-import './classes/session.dart';
 
 String? _userName;
 String? _userEmail;
@@ -143,13 +143,43 @@ Future<int> calculateBalance(int expenses, int income) async {
 }
 
 /*
-10. Get all Transactions for a User
-@Author: Syed Ammar Ahmed
-@Date: 29-Feb-2024
-@output: List of all transactions for a user
+  10. Get all Transactions for a User
+  @Author: Syed Ammar Ahmed
+  @Date: 29-Feb-2024
+  @output: List of all transactions for a user
 */
 Future<List<Transactions>> getTransactions(String email) async {
   return transactions
       .where((transaction) => transaction.email == email)
       .toList();
+}
+
+/*
+  11. Create a new Transaction
+  @Author: Syed Ammar Ahmed
+  @Date: 29-Feb-2024
+  @input: Transaction details
+  @output: True if the transaction is added successfully
+*/
+bool createTransaction({
+  required int amount,
+  required bool income,
+  required String category,
+  String description = '',
+}) {
+  if (isUserSignedIn()) {
+    String userEmail = _userEmail!;
+    Transactions newTransaction = Transactions(
+      email: userEmail,
+      amount: amount,
+      income: income,
+      category: category,
+      description: description,
+    );
+
+    transactions.add(newTransaction);
+    return true;
+  }
+
+  return false;
 }

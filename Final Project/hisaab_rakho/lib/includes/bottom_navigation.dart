@@ -7,6 +7,7 @@
 import 'package:flutter/material.dart';
 import 'package:hisaab_rakho/screens/profile.dart';
 import '../screens/dashboard.dart';
+import './../screens/create_transaction.dart';
 
 BottomNavigationBar bottomNavigation(BuildContext context) {
   return BottomNavigationBar(
@@ -33,7 +34,10 @@ BottomNavigationBar bottomNavigation(BuildContext context) {
           );
           break;
         case 1:
-          // Handle Add button tap
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CreateTransaction()),
+          );
           break;
         case 2:
           Navigator.push(

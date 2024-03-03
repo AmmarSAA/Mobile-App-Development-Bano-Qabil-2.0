@@ -6,7 +6,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import './screens/Splash.dart';
+import 'package:hisaab_rakho/screens/create_transaction.dart';
+import 'package:hisaab_rakho/screens/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.light,
+
+      // Starting Screen
       home: const Splash(),
     );
   }
