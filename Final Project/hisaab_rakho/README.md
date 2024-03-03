@@ -1,6 +1,6 @@
-# hisaab_rakho
+# Hisaab Rakho
 
-A new Flutter project.
+Simple solution for your budget.
 
 ## Getting Started
 
@@ -14,3 +14,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Demo Video
+
+<video controls src="Hisaab Rakho App Demo Video.mp4" title="Demo Video"></video>
