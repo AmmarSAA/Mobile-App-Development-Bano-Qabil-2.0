@@ -6,7 +6,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hisaab_rakho/screens/create_transaction.dart';
 import 'package:hisaab_rakho/screens/splash.dart';
 
 void main() {
