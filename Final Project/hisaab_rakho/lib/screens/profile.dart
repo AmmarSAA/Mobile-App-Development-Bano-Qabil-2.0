@@ -6,7 +6,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:hisaab_rakho/includes/classes/session.dart';
-import 'package:hisaab_rakho/screens/sign_in.dart';
+import 'package:hisaab_rakho/main.dart';
 import './../includes/bottom_navigation.dart';
 
 class Profile extends StatelessWidget {
@@ -86,7 +86,7 @@ class Profile extends StatelessWidget {
               if (Session.signOut()) {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SignIn()),
+                  MaterialPageRoute(builder: (context) => const MyApp()),
                 );
               }
             },
