@@ -9,8 +9,9 @@ import 'package:hisaab_rakho/screens/profile.dart';
 import '../screens/dashboard.dart';
 import './../screens/create_transaction.dart';
 
-BottomNavigationBar bottomNavigation(BuildContext context) {
+BottomNavigationBar bottomNavigation(BuildContext context, int currentIndex) {
   return BottomNavigationBar(
+    currentIndex: currentIndex,
     items: const [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),

@@ -2,7 +2,7 @@
 * File Name: dashboard.dart *
 * Author: Ammar S.A.A       *
 * Content: Dashboard Screen *
-****************************/
+*****************************/
 
 import 'package:flutter/material.dart';
 import '../includes/functions.dart';
@@ -157,38 +157,33 @@ class Dashboard extends StatelessWidget {
           ),
           Expanded(
             child: FutureBuilder<List<Transactions>>(
-              future: getTransactions(Session.getUserEmail()!),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
+                future: getTransactions(Session.getUserEmail()!),
+                builder: (context, snapshot) {
                   List<Transactions> transactions = snapshot.data!;
-                  return ListView.builder(
-                    itemCount: transactions.length,
-                    itemBuilder: (context, index) {
-                      String iconPath = transactions[index].income
-                          ? 'assets/income_arrow.png'
-                          : 'assets/expense_arrow.png';
-                      return ListTile(
-                        leading: Image.asset(
-                          iconPath,
-                          width: 24,
-                          height: 24,
-                        ),
-                        title: Text(transactions[index].description),
-                        subtitle: Text('\$${transactions[index].amount}'),
-                      );
-                    },
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: transactions.map((transaction) {
+                        String iconPath = transaction.income
+                            ? 'assets/income_arrow.png'
+                            : 'assets/expense_arrow.png';
+                        return ListTile(
+                          leading: Image.asset(
+                            iconPath,
+                            width: 24,
+                            height: 24,
+                          ),
+                          title: Text(transaction.description),
+                          subtitle: Text('\$${transaction.amount}'),
+                          trailing: Text(transaction.category),
+                        );
+                      }).toList(),
+                    ),
                   );
-                }
-              },
-            ),
+                }),
           ),
         ],
       ),
-      bottomNavigationBar: bottomNavigation(context),
+      bottomNavigationBar: bottomNavigation(context, 0),
     );
   }
 }

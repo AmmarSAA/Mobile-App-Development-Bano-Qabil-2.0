@@ -58,7 +58,10 @@ class Profile extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 // Account Text on the right
-                const Text('Account', style: TextStyle(fontWeight: FontWeight.bold),),
+                const Text(
+                  'Account',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ),
@@ -76,7 +79,8 @@ class Profile extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 // Settings Text on the right
-                const Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text('Settings',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
           ),
@@ -103,7 +107,8 @@ class Profile extends StatelessWidget {
                   ),
                   const SizedBox(width: 10),
                   // Sign Out Text on the right
-                  const Text('Sign Out', style: TextStyle(fontWeight: FontWeight.bold)),
+                  const Text('Sign Out',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
                 ],
               ),
             ),
@@ -111,7 +116,7 @@ class Profile extends StatelessWidget {
           const Spacer(),
         ],
       ),
-      bottomNavigationBar: bottomNavigation(context),
+      bottomNavigationBar: bottomNavigation(context, 2),
     );
   }
 }
