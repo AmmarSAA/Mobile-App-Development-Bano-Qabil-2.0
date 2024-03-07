@@ -27,4 +27,9 @@ List<User> users = [
     email: 'user@example.com',
     password: 'userPassword',
   ),
+  User(
+    name: 'Syed Ammar Ahmed',
+    email: 's.ammarahmed14@gmail.com',
+    password: '123456789',
+  ),
 ];
