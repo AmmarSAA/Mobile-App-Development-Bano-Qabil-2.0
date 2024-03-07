@@ -40,6 +40,7 @@ class SignUp extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: nameController,
+                    keyboardType: TextInputType.name,
                     decoration: const InputDecoration(
                       hintText: 'Enter your name',
                       labelText: 'Name',
@@ -53,6 +54,7 @@ class SignUp extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       hintText: 'Enter your email',
                       labelText: 'Email',
@@ -66,6 +68,7 @@ class SignUp extends StatelessWidget {
                   const SizedBox(height: 10),
                   TextField(
                     controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: '********',

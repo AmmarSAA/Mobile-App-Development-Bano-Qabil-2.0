@@ -157,8 +157,13 @@ class Dashboard extends StatelessWidget {
           ),
           Expanded(
             child: FutureBuilder<List<Transactions>>(
-                future: getTransactions(Session.getUserEmail()!),
-                builder: (context, snapshot) {
+              future: getTransactions(Session.getUserEmail()!),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else {
                   List<Transactions> transactions = snapshot.data!;
                   return SingleChildScrollView(
                     child: Column(
@@ -179,7 +184,9 @@ class Dashboard extends StatelessWidget {
                       }).toList(),
                     ),
                   );
-                }),
+                }
+              },
+            ),
           ),
         ],
       ),

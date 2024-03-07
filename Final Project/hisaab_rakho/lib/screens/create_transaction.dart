@@ -46,6 +46,7 @@ class CreateTransaction extends StatelessWidget {
                 children: [
                   TextField(
                     controller: amountController,
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       hintText: 'Enter the amount',
                       labelText: 'Amount',
@@ -55,11 +56,11 @@ class CreateTransaction extends StatelessWidget {
                         fontSize: 18,
                       ),
                     ),
-                    keyboardType: TextInputType.number,
                   ),
                   const SizedBox(height: 16),
                   TextField(
                     controller: categoryController,
+                    keyboardType: TextInputType.name,
                     decoration: const InputDecoration(
                       hintText: 'Enter the category',
                       labelText: 'Category',
@@ -73,6 +74,7 @@ class CreateTransaction extends StatelessWidget {
                   const SizedBox(height: 16),
                   TextField(
                     controller: descriptionController,
+                    keyboardType: TextInputType.name,
                     decoration: const InputDecoration(
                       hintText: 'Enter the description',
                       labelText: 'Description',
@@ -145,7 +147,6 @@ class CreateTransaction extends StatelessWidget {
                     if (amount.isNotEmpty &&
                         category.isNotEmpty &&
                         description.isNotEmpty) {
-                      // Add logic to handle transaction creation
                       createTransaction(
                         amount: int.parse(amount),
                         income: isIncomeSelected,
@@ -153,7 +154,7 @@ class CreateTransaction extends StatelessWidget {
                         description: description,
                       );
 
-                      // After successful transaction creation, you can navigate to the dashboard
+                      // After successful transaction creation, navigate to the dashboard
                       Navigator.push(
                         context,
                         MaterialPageRoute(

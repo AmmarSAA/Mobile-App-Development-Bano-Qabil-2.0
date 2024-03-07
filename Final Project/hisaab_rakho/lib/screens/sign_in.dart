@@ -40,6 +40,7 @@ class SignIn extends StatelessWidget {
                 children: [
                   TextField(
                     controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       hintText: 'Enter your email',
                       labelText: 'Email',
@@ -53,6 +54,7 @@ class SignIn extends StatelessWidget {
                   const SizedBox(height: 16),
                   TextField(
                     controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       hintText: '********',
