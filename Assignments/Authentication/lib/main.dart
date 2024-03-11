@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
+import 'package:authentication_app/screens/splash.dart';
 
-import 'screens/splash_screen.dart';
-
-void main() => runApp(const MyApp());
+void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
+      home: splashScreen(),
     );
   }
 }
